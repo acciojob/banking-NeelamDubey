@@ -1,4 +1,5 @@
 package com.driver;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +10,10 @@ public class SavingsAccount extends BankAccount{
     double maxWithdrawalLimit;
 
     public SavingsAccount(String name, double balance, double maxWithdrawalLimit, double rate) {
-        // minimum balance is 0 by default
         super(name,balance,0);
         // minimum balance is 0 by default
         this.rate=rate;
         this.maxWithdrawalLimit=maxWithdrawalLimit;
-
     }
     public void withdraw(double amount) throws Exception {
         // Might throw the following errors:
@@ -27,17 +26,17 @@ public class SavingsAccount extends BankAccount{
             throw  new Exception("Insufficient Balance");
         }
         setBalance(getMinBalance()-amount);
-
     }
 
     public double getSimpleInterest(int years){
+        // Return the final amount considering that bank gives simple interest on current amount
         double simpleInterest=((getBalance()*this.rate)/100)*years;
         return simpleInterest+getBalance();
-        // Return the final amount considering that bank gives simple interest on current amount
 
     }
 
     public double getCompoundInterest(int times, int years){
+        // Return the final amount considering that bank gives compound interest on current amount given times per year
         int month=years*12;
         int  temp=month/times;
         double balance=getBalance();
@@ -47,8 +46,6 @@ public class SavingsAccount extends BankAccount{
             balance+=interest;
         }
         return balance;
-        // Return the final amount considering that bank gives compound interest on current amount given times per year
-
     }
 
 }
